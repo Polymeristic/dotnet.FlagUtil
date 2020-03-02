@@ -126,7 +126,6 @@ In addition to using the `==` operator you can also use `Flag.Match(x, ..)` - th
 ```csharp
 if (currentStatus.Match(Status.ONLINE, Status.PROCESSING)) {
    // would return TRUE because currentStatus has the Status.PROCESSING flag AND the Status.ONLINE flag set.
-   // Since we are creating a compound flag, the compunded flag would need to be set.
 }
 ```
 
