@@ -122,11 +122,11 @@ if (currentStatus == Status.ONLINE) {
 ```
 As you can see the `==` operator does **not** mean 'x is *equals* to y' but instead means 'y is *contained* within x'. If we did need to check for an *exact* match we need to use the helper function `Flag.MatchExact(x, ..)` 
 
-In addition to using the `==` operator you can also use `Flag.Match(x, ..)` - these methods are functionally identical, however, `Flag.Match(x, ..)` supports multiple parameters. As such it will merge them into a single flag then check that against the subject. An example of this in our scenario would be:
+In addition to using the `==` operator you can also use `Flag.Match(x, ..)` - these methods are functionally identical, however, `Flag.Match(x, ..)` supports multiple parameters. As such it will merge them into a single flag then check that against the subject, meaning that all of the parameter flags need to be present. An example of this in our scenario would be:
 ```csharp
-if (currentStatus.Match(Status.OFFLINE, Status.PROCESSING)) {
-   // would return TRUE because currentStatus has the Status.PROCESSING flag set. And since it 
-   // contains Status.PROCESSIG it will return TRUE, even though Status.OFFLINE is not present.
+if (currentStatus.Match(Status.ONLINE, Status.PROCESSING)) {
+   // would return TRUE because currentStatus has the Status.PROCESSING flag AND the Status.ONLINE flag set.
+   // Since we are creating a compound flag, the compunded flag would need to be set.
 }
 ```
 
