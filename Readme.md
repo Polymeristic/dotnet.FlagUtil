@@ -145,6 +145,33 @@ if (currentStatus.MatchExact(Status.ONLINE, Status.PROCESSING)) {
     // this code will run
 }
 ```
+
+#### Checking for any flag matches
+If you have multiple flags that you want to check for, but not as a compound flag, you can use the method `Flag.MatchAny(x, ..)` to achieve this. There are two definitions for `Flag.MatchAny(x, ..)` but we'll talk about the second later. 
+
+This method will check matchs with any flags passed as a parameter, so it can be used as follows:
+```csharp
+Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING);
+
+if (currentStatus.MatchAny(Status.ONLINE, Status.FAILED)) {
+    // this code will run
+}
+```
+
+As even though the flag `currentStatus` does not have the indicator `Status.FAILED` set, it does have `Status.ONLINE` so the method will return true.
+
+As for the second definiton of the `Flag.MatchAny(x, ..)` method, we can also get the flag that was actually matched, it has the signature `Flag.MatchAny(out match, x, ..)`. Importantly, it will only retrieve the *first* match - this may be changed at a later date if nessicary.
+
+An example of it's use is:
+```csharp
+Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING);
+ulong match;
+
+if (currentStatus.MatchAny(out match, Status.ONLINE, Status.FAILED)) {
+    Console.WriteLine(match); // Will output "0001"
+}
+```
+
 ### String Representation
 The `Flag` class implements `ToString()` in a way that it will convert it's flag value into the binary representation of the flag. This was done to ensure ease of idenficiation. As such
 ```csharp
