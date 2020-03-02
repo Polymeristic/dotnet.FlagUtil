@@ -1,5 +1,5 @@
 # dotnet.FlagUtil
-dotnet.FlagUtil is a helper library guided towards assisting with binary flag operations. Allowing for an object oriented approach to binary flags it enables easy method calls for modifying and checking flags.
+dotnet.FlagUtil is a helper library guided towards assisting with binary flag operations. Allowing for an object-oriented approach to binary flags it enables easy method calls for modifying and checking flags.
 
 dotnet.FlagUtil is open source under the MIT licence.
 
@@ -52,7 +52,7 @@ public static void Main() {
 ```
 ### Flag Modification Operations
 #### Merging Indicators
-Merging a flag essentialy means adding a new indicator to the existing flag, in binary terms it is like an 'OR' operator. It would look like such `0010 | 0100 = 0110`. Merging can be done either through methods or on initialization, as the initializer supports multiple parameters. An example  of initialization merging would be:
+Merging a flag essentially means adding a new indicator to the existing flag, in binary terms, it is like an 'OR' operator. It would look like such `0010 | 0100 = 0110`. Merging can be done either through methods or on initialization, as the initializer supports multiple parameters. An example  of initialization merging would be:
 ```csharp
 // Has merged two flags into one
 Flag status = new Flag(Status.ONLINE,
@@ -98,23 +98,23 @@ status.Merge(Status.OFFLINE, Status.ERROR)
 In some, admittedly odd, circumstances you can flip all indicators in the flag by using either the `!` or `~` operators, or `Flag.Reverse()`. Doing so will bit-flip all indicators, meaning `0011` would turn into `1100`.
 
 #### Other binary operators
-Other binary operators such as bit-shifting have not been included due to fear of unnessicary bloat. However if you do wish to edit the flag's underlying value you can access it via the `Value` property.
+Other binary operators such as bit-shifting have not been included due to fear of unnecessary bloat. However, if you do wish to edit the flag's underlying value you can access it via the `Value` property.
 ```csharp
 Flag status = new Flag(Status.ONLINE);
 status.Value = status.Value << 1;
 ```
 
 ### Flag Equality
-Flag equality in dotnet.FlagUtil isn't *exactly* what it would seem at first glance. Some assumptions were made around it's usage in order to be better suited to it's job, as such, it may not seem obvious at first as to the meaning of some operators.
+Flag equality in dotnet.FlagUtil isn't *exactly* what it would seem at first glance. Some assumptions were made around its usage in order to be better suited to its job, as such, it may not seem obvious at first as to the meaning of some operators.
 
 #### Checking for flag indicators
-The `==` operator is perhaps the most confusing as in our case it doesn't explicitly mean 'is x is equals to y?'. In dotnet.FlagUtils, the equals operator means 'is **y** is contained in **x**' - note the flip! Doing things this way means we can easy check for flag indicators.
+The `==` operator is perhaps the most confusing as in our case it doesn't explicitly mean 'is x equals to y?'. In dotnet.FlagUtils, the equals operator means 'is **y** is contained in **x**' - note the flip! Doing things this way means we can easily check for flag indicators.
 
 Say we want to create a flag `currentStatus`, we would initialise it as such:
 ```csharp
 Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING);
 ```
-At present the flag is equivelant to the binary expression `0b0101`, so, if we wish to check if this flag has the `Status.ONLINE` (equiv. to `0b0001`) indicator all we need to do is:
+At present the flag is equivalent to the binary expression `0b0101`, so, if we wish to check if this flag has the `Status.ONLINE` (equiv. to `0b0001`) indicator all we need to do is:
 ```csharp
 if (currentStatus == Status.ONLINE) {
     // do something
@@ -122,7 +122,7 @@ if (currentStatus == Status.ONLINE) {
 ```
 As you can see the `==` operator does **not** mean 'x is *equals* to y' but instead means 'y is *contained* within x'. If we did need to check for an *exact* match we need to use the helper function `Flag.MatchExact(x, ..)` 
 
-In addition to using the `==` operator you can also use `Flag.Match(x, ..)` - these methods are functionally identical, however, `Flag.Match(x, ..)` supports multiple parameters. As such it will merge them into a single flag then check that against the subject, meaning that all of the parameter flags need to be present. An example of this in our scenario would be:
+In addition to using the `==` operator, you can also use `Flag.Match(x, ..)` - these methods are functionally identical, however, `Flag.Match(x, ..)` supports multiple parameters. As such it will merge them into a single flag then check that against the subject, meaning that all of the parameter flags need to be present. An example of this in our scenario would be:
 ```csharp
 if (currentStatus.Match(Status.ONLINE, Status.PROCESSING)) {
    // would return TRUE because currentStatus has the Status.PROCESSING flag AND the Status.ONLINE flag set.
@@ -160,7 +160,7 @@ if (currentStatus.MatchAny(Status.ONLINE, Status.FAILED)) {
 
 As even though the flag `currentStatus` does not have the indicator `Status.FAILED` set, it does have `Status.ONLINE` so the method will return true.
 
-As for the second definiton of the `Flag.MatchAny(x, ..)` method, we can also get the flag that was actually matched, it has the signature `Flag.MatchAny(out match, x, ..)`. Importantly, it will only retrieve the *first* match - this may be changed at a later date if nessicary.
+As for the second definition of the `Flag.MatchAny(x, ..)` method, we can also get the flag that was actually matched, it has the signature `Flag.MatchAny(out match, x, ..)`. Importantly, it will only retrieve the *first* match - this may be changed at a later date if necessary.
 
 An example of it's use is:
 ```csharp
@@ -173,14 +173,14 @@ if (currentStatus.MatchAny(out match, Status.ONLINE, Status.FAILED)) {
 ```
 
 ### String Representation
-The `Flag` class implements `ToString()` in a way that it will convert it's flag value into the binary representation of the flag. This was done to ensure ease of idenficiation. As such
+The `Flag` class implements `ToString()` in a way that it will convert it's flag value into the binary representation of the flag. This was done to ensure ease of identification. As such
 ```csharp
 new Flag(Status.ONLINE, Status.PROCESSING).ToString()
 ```
 Would output `"0101"`
 
 ### HashCode
-Due to the nature of a flag the hash code is simply equal to the flag's value. This means hash tables can be produced based on combined flag indicators. 
-dawd
+Due to the nature of a flag, the hash code is simply equal to the flag's value. This means hash tables can be produced based on combined flag indicators. 
+
 ## Feedback
 For any feedback feel free to add to the Issues panel in the Github repo, or message me directly.
