@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>FlagUtil</AssemblyName>
+    <RootNamespace>FlagUtil</RootNamespace>
+    <Authors>Oliver Mitchell</Authors>
+    <Company>Polymeristic</Company>
+    <Description>Flag utility set. Used for simple and efficient flagging applications, featuring similar traits to Enum flagging. FlagUtil offers simple to use helper funtions and a object oriented approach to flagging.</Description>
+    <PackageLicenseExpression />
+    <Copyright>2019 Oliver Mitchell</Copyright>
+    <PackageLicenseFile>licence.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="licence.txt">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>licence.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="licence.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
