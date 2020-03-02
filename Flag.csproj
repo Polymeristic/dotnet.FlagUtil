@@ -4,27 +4,40 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>FlagUtil</AssemblyName>
     <RootNamespace>FlagUtil</RootNamespace>
+    <Title>dotnet.FlagUtil</Title>
     <Authors>Oliver Mitchell</Authors>
     <Company>Polymeristic</Company>
     <Description>Flag utility set. Used for simple and efficient flagging applications, featuring similar traits to Enum flagging. FlagUtil offers simple to use helper funtions and a object oriented approach to flagging.</Description>
-    <PackageLicenseExpression />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>2019 Oliver Mitchell</Copyright>
-    <PackageLicenseFile>licence.txt</PackageLicenseFile>
+    <PackageLicenseFile></PackageLicenseFile>
+    <RepositoryUrl>https://github.com/Polymeristic/dotnet.FlagUtil</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>flag,flagging,states,enum,helper</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>icon-256.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageProjectUrl>https://github.com/Polymeristic/dotnet.FlagUtil</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="licence.txt">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>licence.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="licence.txt">
+    <None Remove="licence.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon\icon-256.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)lib\$(TargetName).dll&quot;" />
+  </Target>
 
 </Project>
