@@ -149,7 +149,7 @@ if (currentStatus.MatchExact(Status.ONLINE, Status.PROCESSING)) {
 #### Checking for any flag matches
 If you have multiple flags that you want to check for, but not as a compound flag, you can use the method `Flag.MatchAny(x, ..)` to achieve this. There are two definitions for `Flag.MatchAny(x, ..)` but we'll talk about the second later. 
 
-This method will check matchs with any flags passed as a parameter, so it can be used as follows:
+This method will check for a match with any flag passed as a parameter, so it can be used as follows:
 ```csharp
 Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING);
 
