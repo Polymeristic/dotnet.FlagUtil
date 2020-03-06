@@ -112,7 +112,7 @@ The `==` operator is perhaps the most confusing as in our case it doesn't explic
 
 Say we want to create a flag `currentStatus`, we would initialise it as such:
 ```csharp
-Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING);
+Flag currentStatus = new Flag(Status.ONLINE, Status.PROCESSING, Status.FAILED);
 ```
 At present the flag is equivalent to the binary expression `0b0101`, so, if we wish to check if this flag has the `Status.ONLINE` (equiv. to `0b0001`) indicator all we need to do is:
 ```csharp
